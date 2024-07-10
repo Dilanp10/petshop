@@ -1,0 +1,10 @@
+.conteinerP{
+    background-color: aqua;
+    height: 100vh;
+}
+.segundoCont{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: salmon;
+}

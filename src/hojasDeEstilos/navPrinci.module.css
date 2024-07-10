@@ -1,0 +1,37 @@
+.ConteinerP{
+    background-color: transparent;
+    width: 100px;
+    height: 100%;
+    margin:  -22px -20px -10px -10px;
+
+}
+.barra{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    /* justify-content: center; */
+    align-items: center;
+    margin-left: 5px;
+    width: auto;
+    max-width: 70px;
+    grid-column: 1/1;
+}
+.barraDos{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr; 
+    gap: 3px;   
+    background-color: rgb(22, 64, 80);
+    border-radius: 8px;
+
+}
+.botonBarra{
+    background-color: rgb(13, 93, 93);
+    width: 50px;
+    border-radius: 10px;
+    border: 1px solid black !important;
+    cursor: pointer;
+    height: auto;
+}
+
+.focusLink:focus{
+    background-color: red;
+}

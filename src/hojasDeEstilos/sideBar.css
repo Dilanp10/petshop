@@ -1,0 +1,34 @@
+.sidebar {
+    max-width: 300px;
+    min-width: 240px;
+    height: 100%;
+    background-color: #12263a;
+    color: #fff;
+    margin-right: 20px;
+    padding-right: 15px;
+    padding-left: 15px;
+    position: fixed;
+  }
+  
+  .list {
+    padding: 15px;
+    margin-top: 20px;
+    list-style-type: none;
+    color: blanchedalmond;
+    background-color: transparent;
+    border-radius: 10px;
+    border: 1px solid rgb(28, 50, 105);
+    
+  }
+  
+.list:hover{
+    background-color: #202c37;
+}
+
+.marca{
+    text-decoration: none;
+    color: bisque;    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

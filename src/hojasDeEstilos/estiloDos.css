@@ -1,0 +1,28 @@
+.divprincipal{
+    background-color: rgb(247, 181, 99);
+    height: auto;
+}
+
+.registro{
+    display: grid;
+    grid-template-rows: repeat(8,1fr);
+    grid-template-rows: minmax(40px,100px);
+    align-items: center;
+    justify-content: center;
+
+}
+input{
+    width: auto;
+    margin-top: -13px;
+}
+.botn{
+    border-radius: 10px;
+    margin-top: 30px;
+}
+.logo:hover{
+    filter: drop-shadow(15px 2px 3px rgb(9, 8, 8));
+  
+}
+.opcion{
+    background-color: blue;
+}

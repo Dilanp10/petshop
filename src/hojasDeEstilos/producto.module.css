@@ -1,0 +1,255 @@
+.ppp {
+  display: grid;
+  grid-template-columns: 1fr 3fr; /* Ajusta las columnas para dar más espacio al contenido principal */
+  /* background: linear-gradient(135deg, #6a1b9a 0%, #00bfa5 100%); */
+  background-color: #f7ebeb;
+  min-height: 100vh;
+  padding: 20px 0; /* Elimina el padding lateral */
+  margin: 0; /* Elimina el margen */
+  justify-items: start; /* Alinea el contenido al inicio */
+  margin-top: -28px;
+}
+
+@media (max-width: 768px) {
+  .ppp {
+    grid-template-columns: 1fr; /* Una columna en dispositivos móviles */
+  }
+}
+
+/* Estilo para el contenedor centrado */
+.ttt {
+  grid-column: 2 / 3; /* Asegura que ocupe la segunda columna */
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-left: 25px;
+}
+
+/* Estilos para el sidebar */
+.sidebar {
+  grid-column: 1 / 2; /* Ocupa la primera columna */
+  height: 100vh;
+  background-color: #333; /* Color de fondo del sidebar */
+  color: white;
+  padding: 20px 0; /* Ajusta el padding del sidebar */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  position: fixed; /* Fija el sidebar en su lugar */
+  top: 0;
+  left: 0;
+  width: 250px; /* Ancho del sidebar */
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: relative; /* Ajusta el posicionamiento en dispositivos móviles */
+    height: auto;
+    width: 100%; /* Ancho completo en dispositivos móviles */
+  }
+
+  .ttt {
+    grid-column: 1 / -1; /* Ocupa todo el ancho en dispositivos móviles */
+    margin-left: 0; /* Elimina el margen izquierdo */
+  }
+}
+
+/* Estilos para el título */
+.titulo {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 28px;
+  color: #333;
+  font-weight: bold;
+  text-transform: uppercase; /* Transforma el texto a mayúsculas */
+}
+
+/* Estilos para el formulario */
+.formulario {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f0f0f0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.listaProductos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.tablaProductos {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.tablaProductos th,
+.tablaProductos td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.tablaProductos th {
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+.tablaProductos tr:hover {
+  background-color: #e0e0e0; /* Color de fondo más fuerte al pasar el mouse */
+}
+
+.producto {
+  border: 1px solid #ddd;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease; /* Agrega una transición suave */
+}
+
+.producto img {
+  max-width: 100px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.producto:hover {
+  transform: translateY(-5px); /* Efecto de elevación al pasar el ratón */
+}
+
+input[type="text"] {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s ease; /* Transición suave para el borde */
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #007bff; /* Cambio de color al enfocar */
+}
+
+button {
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #0e253d;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: 'Courier New', Courier, monospace;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #060c38;
+}
+
+
+.editar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.error {
+  color: red;
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .ttt {
+    grid-column: 1 / -1; /* Ocupa todo el ancho en dispositivos móviles */
+  }
+
+  .formulario {
+    max-width: 100%; /* Aprovecha el ancho completo del dispositivo */
+  }
+
+  .producto {
+    padding: 10px;
+  }
+}
+
+.spa {
+  color: #9d2121;
+  font-size: 20px;
+}
+
+.detalleFlotante {
+  position: fixed;
+  z-index: 1000;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  max-width: 80%;
+}
+
+.contenidoDetalle {
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.close:hover {
+  color: red;
+}
+.divCreate{
+  background-color: #9d2121;
+  height: 100vh;
+}
+.crea{
+  display: flex;
+  flex-direction: row-reverse;
+  margin-right: 60px;
+  border: 2px solid rgb(33, 30, 44);
+  margin-left: 760px;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: #0e253d;
+  font-size: 16px;
+  font-family: 'Courier New', Courier, monospace;
+  margin-bottom: -45px;
+  justify-content: center;
+}
+.creas{
+  text-decoration: none;
+  color: #fff;
+}
+.searchContainer{
+  margin-bottom: -20px;
+}
+.searchInput{
+  background-color: #0e253d;
+  border: 0px solid transparent;
+  color: #fff;
+}
+.searchInput:hover{
+  background-color: #0e253d;
+  border: 0px solid transparent;
+  color: #fff;
+}
+.searchInput:focus{
+  background-color: #0e253d;
+  border: 0px solid transparent;
+  color: #fff;
+}

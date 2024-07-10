@@ -1,0 +1,10 @@
+.conteinerPrincipal{
+ background-color: aquamarine;
+ display: flex;
+ align-items: center;
+ width: 100%;
+ height: 100%;
+}
+.ws{
+    color: rgb(69, 39, 97);
+}

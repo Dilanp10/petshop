@@ -1,0 +1,130 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.divvv {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f7ebeb;
+}
+
+.sideBar {
+  max-width: 300px;
+  min-width: 240px;
+  height: 100vh; /* Asegúrate de que ocupe toda la altura de la pantalla */
+  background-color: #12263a;
+  color: #fff;
+  margin-right: 20px;
+}
+
+.ds {
+  flex: 1;
+  padding: 20px;
+  background-color: #fff;
+  margin: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+  margin-left: 350px;
+  width: 700px;
+
+}
+
+/* Estilo para la lista y los elementos de la lista */
+.ds ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.ds li {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 15px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.ds li:hover {
+  background-color: #e0e0e0;
+  transform: translateY(-5px);
+}
+
+.botons {
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #0e253d;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: 'Courier New', Courier, monospace;
+  transition: background-color 0.3s ease;
+}
+
+.botons:hover {
+  transition: 0.5s;
+  background-color: #ce0f0f;
+}
+
+/* Estilo para el formulario */
+.formulario {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.formulario label {
+  margin-bottom: 10px;
+}
+
+.formulario input {
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.formulario button {
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #0e253d;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: 'Courier New', Courier, monospace;
+  transition: background-color 0.3s ease;
+}
+
+.formulario button:hover {
+  background-color: #218838;
+}
+
+/* Additional Sidebar styles */
+.list {
+  padding: 15px;
+  margin-top: 20px;
+  list-style-type: none;
+  color: blanchedalmond;
+  background-color: transparent;
+  border-radius: 10px;
+  border: 1px solid rgb(28, 50, 105);
+}
+
+.list:hover {
+  background-color: #202c37;
+}
+
+.marca {
+  text-decoration: none;
+  color: bisque;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

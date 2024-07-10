@@ -1,0 +1,129 @@
+.conteiner-principal {
+  background: linear-gradient(135deg, #f06, #b3503e);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  height: 100vh;
+  align-items: center;
+  justify-items: center;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Imagen del lado izquierdo */
+.div-imagen {
+  background-color: #b9c6d1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.img {
+  height: 420px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.img:hover {
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+}
+
+/* Logo y título */
+.div-chiqui {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  height: 60px;
+  width: 60px;
+}
+
+.segundo-conteiner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 36px;
+  color: #333;
+}
+
+h3 {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+input {
+  width: 100%;
+  max-width: 300px;
+  height: 40px;
+  border-radius: 5px;
+  border: solid 1px #231a1a;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+input:focus {
+  background-color: #000;
+  color: #fff;
+  outline: none;
+}
+
+/* Botón de acceso */
+.boton {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.cont-boton {
+  background-color: #eaa581;
+  color: white;
+  width: 200px;
+  height: 50px;
+  border-radius: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.cont-boton:hover {
+  background-color: #d18a63;
+}
+
+/* Enlace de registro */
+p {
+  font-size: 14px;
+  color: #666;
+}
+
+p a {
+  color: #b3503e;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+p a:hover {
+  text-decoration: underline;
+}
+
+/* Otros estilos */
+.dos {
+  background-color: aqua;
+}
