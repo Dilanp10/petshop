@@ -198,7 +198,12 @@ ul li {
     width:auto;
     font-family: 'Courier New', Courier, monospace;
     transition: background-color 0.3s ease;
-  }.botoncis:hover{   
+  }
+ .bton{
+    background-color: #0e253d;
+
+ }
+  .botoncis:hover{   
      background-color: #21b742; 
   }
   .link{
@@ -224,3 +229,47 @@ ul li {
     border: 0px solid transparent;
     color: #fff;
 }
+/* detalles */
+
+.detallesMedicina {
+    background-color: #f7ebeb; /* Fondo de la página */
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .formulario {
+    width: 100%;
+    max-width: 600px; /* Ajusta según necesites */
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .input {
+    width: calc(100% - 12px); /* Para el padding */
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #c4c7c1;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .bton {
+    background-color: #0e253d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .bton:hover {
+    background-color: #060c38;
+  }

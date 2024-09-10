@@ -6,7 +6,7 @@ html, body {
 }
 
 .ConteinerP {
-    background-color: rgb(139, 139, 223);
+    background-color: rgba(234, 221, 173, 0.867);
     width: 100%;
     min-height: 100vh;
     box-sizing: border-box;

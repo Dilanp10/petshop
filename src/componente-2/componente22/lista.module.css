@@ -103,7 +103,7 @@ html, body {
 }
 
 .formulario button:hover {
-  background-color: #218838;
+  /* background-color: #218838; */
 }
 
 /* Additional Sidebar styles */
@@ -127,4 +127,83 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.nose{
+  /* background-color: aqua; */
+  display: flex;
+}
+
+ .link{
+  text-decoration: none;
+  color: #fff;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px;
+}
+.botoncis{
+  padding: 10px 20px;
+  margin-left: 750px;
+  cursor: pointer;
+  background-color: #0e253d;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  width:150px;
+  font-family: 'Courier New', Courier, monospace;
+  transition: background-color 0.3s ease;
+}
+.botoncis:hover{   
+  background-color: #21b742; 
+}
+.botonsds{
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #0e253d;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: 'Courier New', Courier, monospace;
+  transition: background-color 0.3s ease;
+  margin-bottom: 6px;
+}
+.botonsds:hover{
+  background-color: #060c38;
+}
+.userTable {
+  width: 100%;
+  border-collapse: collapse; /* Para que los bordes se unan */
+  margin-top: 20px;
+}
+.userTable th, .userTable td {
+  border: 1px solid rgba(153, 153, 153, 0.5);
+  padding: 10px;
+  text-align: left;
+}
+
+.userTable th {
+  background-color: #f2f2f2;
+}
+
+.formulario {
+  margin-top: 20px;
+  padding: 20px;
+  border: 0.5px solid #ccc;
+    background-color: #f9f9f9;
+}
+.formRow {
+  margin-bottom: 15px;
+}
+
+.formRow label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.formRow input {
+  width: 100%;
+  padding: 8px;
+  border: 0.5px solid #ccc;
+   border-radius: 4px;
 }

@@ -41,6 +41,11 @@ function Sidebar() {
                         Atencion a Clientes
                     </NavLink>
                 </li>
+                <li  className='list'>
+                    <NavLink to='/caja' className='marca' >
+                       Caja
+                    </NavLink>
+                </li>
             </ul>
         </nav>
     );

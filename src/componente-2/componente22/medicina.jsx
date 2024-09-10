@@ -1,68 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import style from './medici.module.css';
 import Sidebar from '../barraDeNavegacion/sidebar';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { IoMdAddCircle } from "react-icons/io";
-
 
 export function Medicina() {
   const [productos, setProductos] = useState([]);
   const [nuevoProducto, setNuevoProducto] = useState('');
   const [nuevoStock, setNuevoStock] = useState('');
   const [vencimiento, setVencimiento] = useState('');
-  const [buscarProducto, setBuscarProducto] = useState('');
-  const [editandoProducto, setEditandoProducto] = useState(null);
-  const [productoEditado, setProductoEditado] = useState({ nombre: '', stock: '', vencimiento: '' });
-  const [productoAEliminar, setProductoAEliminar] = useState(null);
 
-  const agregarProducto = () => {
-    if (nuevoProducto && nuevoStock && vencimiento) {
-      const nuevoProductoObj = { id: Date.now(), nombre: nuevoProducto, stock: nuevoStock, vencimiento: vencimiento };
-      setProductos([...productos, nuevoProductoObj]);
-      setNuevoProducto('');
-      setNuevoStock('');
-      setVencimiento('');
-    }
+  const agregarProducto = async () => {
+    if (nuevoProducto && nuevoStock && vencimiento){
+
+        const confirmacionn=window.confirm('estas seguro de crear el producto '+ nuevoProducto);
+      const nuevoProductoObj = { title: nuevoProducto, body: `Stock: ${nuevoStock}`, userId: 1 };
+
+      if(confirmacionn){
+        try {
+          const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(nuevoProductoObj),
+          });
+  
+          if (response.ok) {
+            const productoCreado = await response.json();
+            setProductos([
+              ...productos,
+              {
+                id: productoCreado.id,
+                nombre: nuevoProducto,
+                stock: nuevoStock,
+                vencimiento: vencimiento,
+              },
+            ]);
+            setNuevoProducto('');
+            setNuevoStock('');
+            setVencimiento('');
+            window.history.back();
+          } else {
+            console.error('Error al agregar el producto:', response.statusText);
+          }
+        } catch (error) {
+          console.error('Error en la solicitud:', error);
+        }
+      }
+      }
   };
-
-  const confirmarEliminacion = (producto) => {
-    setProductoAEliminar(producto);
-  };
-
-  const eliminarProducto = () => {
-    setProductos(productos.filter((producto) => producto.id !== productoAEliminar.id));
-    setProductoAEliminar(null);
-  };
-
-  const iniciarEdicion = (producto) => {
-    setEditandoProducto(producto.id);
-    setProductoEditado({ nombre: producto.nombre, stock: producto.stock, vencimiento: producto.vencimiento });
-  };
-
-  const manejarCambioEdicion = (e) => {
-    const { name, value } = e.target;
-    setProductoEditado({ ...productoEditado, [name]: value });
-  };
-
-  const editarProducto = (id) => {
-    setProductos(productos.map((producto) =>
-      producto.id === id ? { ...producto, nombre: productoEditado.nombre, stock: productoEditado.stock, vencimiento: productoEditado.vencimiento } : producto
-    ));
-    setEditandoProducto(null);
-  };
-
-  const manejarCambioStock = (id, cantidad) => {
-    setProductos(productos.map((producto) =>
-      producto.id === id ? { ...producto, stock: cantidad } : producto
-    ));
-  };
-
-  const productosFiltrados = productos.filter(producto =>
-    producto.nombre.toLowerCase().includes(buscarProducto.toLowerCase())
-  );
-
-  const hoy = new Date();
-  const productosVencidos = productos.filter(producto => new Date(producto.vencimiento) < hoy);
 
   return (
     <div className={style.conteinerprincipal}>
@@ -90,137 +77,49 @@ export function Medicina() {
           />
           <button className={style.bton} onClick={agregarProducto}>Agregar nuevo Medicamento</button>
         </div>
-        <div>
-          <h3>Listado de Medicamentos</h3>
-          <input
-            type="text"
-            placeholder="Buscar Medicamento"
-            value={buscarProducto}
-            onChange={(e) => setBuscarProducto(e.target.value)}
-          />
-          <form className={style.formulario}>
-            {productosFiltrados.map((producto) => (
-              <div key={producto.id} className={style.producto}>
-                {editandoProducto === producto.id ? (
-                  <>
-                    <input
-                      type="text"
-                      name="nombre"
-                      value={productoEditado.nombre}
-                      onChange={manejarCambioEdicion}
-                    />
-                    <input
-                      type="number"
-                      name="stock"
-                      value={productoEditado.stock}
-                      onChange={manejarCambioEdicion}
-                      placeholder="Stock"
-                    />
-                    <input
-                      type="date"
-                      name="vencimiento"
-                      value={productoEditado.vencimiento}
-                      onChange={manejarCambioEdicion}
-                    />
-                    <button type="button" onClick={() => editarProducto(producto.id)}>Guardar</button>
-                    <button type="button" onClick={() => confirmarEliminacion(producto)}>Eliminar</button>
-                  </>
-                ) : (
-                  <>
-                    <span className={style.spa}>{producto.nombre}</span>
-                    <span className={style.spa}>Stock: {producto.stock}</span>
-                    <span className={style.spa}>Vence: {new Date(producto.vencimiento).toLocaleDateString()}</span>
-                    <button type="button" onClick={() => iniciarEdicion(producto)}>Editar</button>
-                    <button type="button" onClick={() => manejarCambioStock(producto.id,Number(producto.stock) + 1)}>Aumentar Stock</button>
-                    <button type="button" onClick={() => manejarCambioStock(producto.id, Number(producto.stock) - 1)}>Disminuir Stock</button>
-                  </>
-                )}
-              </div>
-            ))}
-          </form>
-        </div>
-        <div>
-          <h3>Aviso de Vencimiento</h3>
-          <ul>
-            {productosVencidos.map((producto) => (
-              <li key={producto.id}>{producto.nombre} <span className={style.spa}> venció el {new Date(producto.vencimiento).toLocaleDateString()} </span></li>
-            ))}
-          </ul>
-        </div>
       </div>
-      {productoAEliminar && (
-        <div className={style.modal}>
-          <div className={style.modalContent}>
-            <h4>Confirmar Eliminación</h4>
-            <p>¿Está seguro que desea eliminar {productoAEliminar.nombre}?</p>
-            <button onClick={eliminarProducto}>Eliminar</button>
-            <button onClick={() => setProductoAEliminar(null)}>Cancelar</button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
 
-
-
 export function ListaMedicina() {
   const [buscarMedicina, setBuscarMedicina] = useState('');
-  const [modalAbierta, setModalAbierta] = useState(false);
-  const [productoSeleccionado, setProductoSeleccionado] = useState(null);
-  const [medicinas, setMedicinas] = useState([
-    { id: 1, nombre: 'Aspirina', stock: 100, precio: 5.99, vencimiento: '2024-12-01' },
-    { id: 2, nombre: 'Paracetamol', stock: 50, precio: 3.49, vencimiento: '2023-10-15' },
-    { id: 3, nombre: 'Ibuprofeno', stock: 75, precio: 4.99, vencimiento: '2025-07-20' },
-  ]);
+  const [medicinas, setMedicinas] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchMedicinas = async () => {
+      try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+        const data = await response.json();
+        // Simulamos la estructura de los datos con nombre, stock, precio y vencimiento
+        const medicinas = data.slice(0, 10).map(item => ({
+          id: item.id,
+          nombre: `Medicina ${item.id}`,
+          stock: Math.floor(Math.random() * 100),
+          precio: (Math.random() * 10).toFixed(2),
+          vencimiento: '2025-12-31',
+        }));
+        setMedicinas(medicinas);
+      } catch (error) {
+        console.error("Error al obtener las medicinas:", error);
+      }
+    };
+
+    fetchMedicinas();
+  }, []);
 
   const handleBuscarMedicina = (e) => {
     setBuscarMedicina(e.target.value);
   };
 
-  const abrirModal = (producto) => {
-    setProductoSeleccionado(producto);
-    setModalAbierta(true);
-  };
-
-  const cerrarModal = () => {
-    setProductoSeleccionado(null);
-    setModalAbierta(false);
-  };
-
-  const handleEditar = () => {
-    if (productoSeleccionado) {
-      const medicinasActualizadas = medicinas.map(medicina =>
-        medicina.id === productoSeleccionado.id ? productoSeleccionado : medicina
-      );
-      setMedicinas(medicinasActualizadas); // Actualizar la lista de medicinas
-      console.log('Medicina editada:', productoSeleccionado);
-    }
-    cerrarModal(); // Cerrar modal después de editar
-  };
-
-  const handleEliminar = () => {
-    if (productoSeleccionado) {
-      const medicinasActualizadas = medicinas.filter(medicina =>
-        medicina.id !== productoSeleccionado.id
-      );
-      setMedicinas(medicinasActualizadas); // Actualizar la lista de medicinas
-      console.log('Medicina eliminada:', productoSeleccionado);
-    }
-    cerrarModal(); // Cerrar modal después de eliminar
+  const verDetalles = (id) => {
+    navigate(`/medicinaDetalle/${id}`);
   };
 
   const medicinasFiltradas = medicinas.filter(medicina =>
     medicina.nombre.toLowerCase().includes(buscarMedicina.toLowerCase())
   );
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setProductoSeleccionado(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
-  };
 
   return (
     <div className={style.divLstado}>
@@ -228,7 +127,7 @@ export function ListaMedicina() {
       <div className={style.divSegund}>
         <div className={style.hed}>
           <button className={style.botoncis}>
-            <NavLink to='/medicina' className={style.link}>Crear <IoMdAddCircle color='white' size='23px'  /></NavLink>
+            <NavLink to='/medicina' className={style.link}>Crear <IoMdAddCircle color='white' size='23px' /></NavLink>
           </button>
           <input
             type="text"
@@ -249,45 +148,142 @@ export function ListaMedicina() {
             </tr>
           </thead>
           <tbody>
-            {medicinasFiltradas.map((medicina, index) => (
+            {medicinasFiltradas.map((medicina) => (
               <tr key={medicina.id}>
                 <td>{medicina.nombre}</td>
                 <td>{medicina.stock}</td>
                 <td>{medicina.precio}</td>
                 <td>{medicina.vencimiento}</td>
                 <td>
-                  <button className={style.botonAcciones} onClick={() => abrirModal(medicina)}>Ver Más</button>
+                  <button onClick={() => verDetalles(medicina.id)}>Ver Más</button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      {modalAbierta && (
-        <div className={style.modal}>
-          <div className={style.modalContent}>
-            <h4>{productoSeleccionado ? `Detalles de ${productoSeleccionado.nombre}` : 'Detalles del Producto'}</h4>
+    </div>
+  );
+}
+
+export function DetallesMedicina() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [medicina, setMedicina] = useState(null);
+  const [nombre, setNombre] = useState('');
+  const [stock, setStock] = useState('');
+  const [precio, setPrecio] = useState('');
+  const [vencimiento, setVencimiento] = useState('');
+
+  useEffect(() => {
+    const fetchMedicina = async () => {
+      try {
+        const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
+        const data = await response.json();
+        const medicinaDetalles = {
+          id: data.id,
+          nombre: `Medicina ${data.id}`,
+          stock: Math.floor(Math.random() * 100),
+          precio: (Math.random() * 10).toFixed(2),
+          vencimiento: '2025-12-31',
+        };
+        setMedicina(medicinaDetalles);
+        setNombre(medicinaDetalles.nombre);
+        setStock(medicinaDetalles.stock);
+        setPrecio(medicinaDetalles.precio);
+        setVencimiento(medicinaDetalles.vencimiento);
+      } catch (error) {
+        console.error("Error al obtener los detalles de la medicina:", error);
+      }
+    };
+
+    fetchMedicina();
+  }, [id]);
+
+  const handleGuardarCambios = async () => {
+    const confirmacion = window.confirm('¿Estás seguro de que quieres guardar los cambios?');
+
+    if (confirmacion) {
+      const medicinaActualizada = {
+        ...medicina,
+        nombre,
+        stock,
+        precio,
+        vencimiento,
+      };
+
+      try {
+        const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(medicinaActualizada),
+        });
+
+        if (response.ok) {
+          console.log('Medicina editada:', medicinaActualizada);
+          navigate(-1); // Redirige a la página anterior
+        } else {
+          console.error('Error al guardar los cambios:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error en la solicitud de actualización:', error);
+      }
+    }
+  };
+
+  return (
+    <div className={style.conteinerprincipal}>
+      <Sidebar />
+      <div className={style.segundoConteiner}>
+        {medicina ? (
+          <div>
+            <h2>Detalles de {nombre}</h2>
             <div className={style.formulario}>
               <label htmlFor="nombre">Nombre:</label>
-              <input type="text" id="nombre" name="nombre" value={productoSeleccionado.nombre} onChange={handleChange} />
+              <input
+                type="text"
+                id="nombre"
+                value={nombre}
+                onChange={(e) => setNombre(e.target.value)}
+                className={style.input}
+              />
 
               <label htmlFor="stock">Stock:</label>
-              <input type="number" id="stock" name="stock" value={productoSeleccionado.stock} onChange={handleChange} />
+              <input
+                type="number"
+                id="stock"
+                value={stock}
+                onChange={(e) => setStock(e.target.value)}
+                className={style.input}
+              />
 
               <label htmlFor="precio">Precio:</label>
-              <input type="number" id="precio" name="precio" step="0.01" value={productoSeleccionado.precio} onChange={handleChange} />
+              <input
+                type="number"
+                id="precio"
+                value={precio}
+                onChange={(e) => setPrecio(e.target.value)}
+                className={style.input}
+              />
 
               <label htmlFor="vencimiento">Vencimiento:</label>
-              <input type="date" id="vencimiento" name="vencimiento" value={productoSeleccionado.vencimiento} onChange={handleChange} />
+              <input
+                type="date"
+                id="vencimiento"
+                value={vencimiento}
+                onChange={(e) => setVencimiento(e.target.value)}
+                className={style.input}
+              />
             </div>
-            <div className={style.accionesModal}>
-              <button className={style.botonModal} onClick={handleEditar}>Guardar</button>
-              <button className={style.botonModal} onClick={handleEliminar}>Eliminar</button>
-              <button className={style.botonModal} onClick={cerrarModal}>Cerrar</button>
-            </div>
+            <button className={style.bton} onClick={handleGuardarCambios}>Guardar Cambios</button>
+            <button className={style.bton} onClick={() => navigate(-1)}>Volver</button>
           </div>
-        </div>
-      )}
+        ) : (
+          <p>Cargando detalles de la medicina...</p>
+        )}
+      </div>
     </div>
   );
 }

@@ -1,0 +1,78 @@
+
+
+.conteinerP{
+    display: grid;
+    grid-template-columns: 1fr 3fr; 
+    background-color: #f7ebeb;
+    min-height: 100vh;
+    padding: 20px 0;
+    margin: 0; 
+    margin-top: -28px;
+}
+.segundoCont{
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    margin-left: 350px;
+}
+
+.tablaMedicinas{
+    width: 100%;
+    border-collapse: collapse;
+}
+.tablaMedicinas th, .tablaMedicinas td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+.tablaMedicinas th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #0e253d;
+    color: white;
+  }
+  .link{
+    text-decoration: none;
+    color: #fff;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;  
+}
+.custombutton {
+    padding: 10px 20px; /* Espaciado interno del botón */
+    background-color: #0e253d;
+    color: #fff; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer;
+    text-decoration: none; 
+    display: inline-block; 
+  }
+ 
+.segundoCont2{
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-radius: 8px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+.conteinerP2{
+  
+}
+.searchContainer{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.NavLL{
+  text-decoration: none; 
+  margin-left: 210px;
+}
